@@ -50,15 +50,25 @@
                 
                 if(isset($pet_name) && isset($pet_description) && isset($pet_img) && isset($username) && isset($address) && isset($phone) && isset($email)){
                     $sqlUpUser = "UPDATE users SET user_name = '$username', user_phone = '$phone', user_email = '$email' WHERE user_id = '$userId'";
-                    $sqlInerst = "INSERT INTO pet (pet_id, pet_name, pet_description, pet_category_id, pet_img, user_id, pet_date, pet_status) 
-                    VALUES ('$random_char', '$pet_name', '$pet_description', '$pet_category_id', '$pet_img','$userId', CURRENT_TIMESTAMP(),'')";
+                    $sqlInerst = "INSERT INTO pet (pet_id, pet_name, pet_description, pet_category_id, pet_img, user_id, pet_date_add, pet_status) 
+                    VALUES ('', '$pet_name', '$pet_description', '$pet_category_id', '$pet_img','$userId', CURRENT_TIMESTAMP(),'')";
                     // echo $sqlInerst; exit;
                     // $sqlCopy = "INSERT INTO service (service_name, user_id, pet_id)
                     // SELECT pet_description, user_id, pet_id FROM pet";
                     // echo $sqlCopy; exit;
-
+                    // echo $sqlIn; exit;
                     mysqli_query($con, $sqlUpUser);
                     mysqli_query($con, $sqlInerst);
+                    
+                    $sqlSe = "SELECT * FROM pet ORDER BY pet_id DESC";
+                    $rs = $con->query($sqlSe);
+                    $row = mysqli_fetch_assoc($rs);
+                    $pet_id = $row['pet_id'];
+                    $sqlIn = "INSERT INTO service (service_id, service_name, user_id, pet_id) 
+                    VALUES ('$random_char', '$pet_description','$userId', '$pet_id')";
+                    // echo $sqlSe;
+                    // echo $pet_id; exit;
+                    mysqli_query($con, $sqlIn);
                     // mysqli_query($con,$sqlCopy);
                     move_uploaded_file($pet_img_tmp, './asset/img/' . $path_image);
                     $message = "Đã đăng ký lịch!";

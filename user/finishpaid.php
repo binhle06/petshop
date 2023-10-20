@@ -10,7 +10,7 @@ require_once "../connect.php";
             $email = $_POST['email'];
             $sql_upUser = "UPDATE users SET user_name = '$name', user_phone = '$phone', user_email = '$email' WHERE user_id = '$userId'";
             // echo $sql_upUser;
-            $sql_update = "UPDATE orders SET Status = '1' WHERE user_id = '$userId'";
+            $sql_update = "UPDATE orders SET order_status = '1' WHERE user_id = '$userId'";
             // echo $sql_update; exit;
             $up = $con->query($sql_upUser);
             $que = $con->query($sql_update);

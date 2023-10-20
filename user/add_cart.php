@@ -44,13 +44,13 @@
                                             foreach($rs_order as $r ){
                                                 $i = ($r['pet_prod_id']);
                                                 $sl_daco = ($r['order_numberOfItem']);
-                                                $status = ($r['Status']);
+                                                $status = ($r['order_status']);
                                                 // echo $sl_daco; exit;
                                             }
                                                 if($i == '' || $status == '1'){
                                                     $newItemPet = $sl - $quantity;
                                                     // echo $newItemPet; exit;
-                                                    $sql_insert= "INSERT INTO orders (order_id, order_date, order_total, order_numberOfItem, user_id, status, pet_prod_id) 
+                                                    $sql_insert= "INSERT INTO orders (order_id, order_date, order_total, order_numberOfItem, user_id, order_status, pet_prod_id) 
                                                     VALUES ('$random_char',CURRENT_TIMESTAMP(),'$total','$quantity','$userId','0','$id')";
                                                     $insert = $con->query($sql_insert);
 

@@ -26,8 +26,7 @@
                             <center><?php 
                                 require "../connect.php";
                                 $id=$_GET['id'];
-                                $sql= "SELECT o.order_total, o.order_numberOfItem, p.pet_prod_name, p.pet_prod_image, o.order_date,
-                                p.pet_prod_price, p.pet_prod_id, o.Status, u.user_name
+                                $sql= "SELECT *
                                 FROM orders AS o, pet_product AS p, users AS u WHERE o.pet_prod_id = p.pet_prod_id AND o.user_id = '$id' AND u.user_id = '$id'";
                                 // echo $sql; exit;
                                 $rs = $con->query($sql);
@@ -64,7 +63,7 @@
                                     </td>
                                     <td><?php echo  number_format($value['order_total'], 0, ',', '.');?></td>
                                     <td>
-                                        <?php if($value['Status'] == 1){
+                                        <?php if($value['order_status'] == 1){
                                             echo "Đã thanh toán";
                                         } else{
                                             echo "Chưa thanh toán";

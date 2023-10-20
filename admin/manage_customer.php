@@ -8,20 +8,17 @@ include("../connect.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/logonew.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"
-        type="text/css">
     <link rel="stylesheet" href="../asset/css/admin.css">
-
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="js/jquery-1.11.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>P-shop | ADMIN</title>
 </head>
 
 <body>
     <section class="header">
-        <nav>
+    <?php 
+        include './header.php';
+    ?>
+        <!-- <nav>
             <div class="nav-links">
                 <ul>
                     <li><a class="text-danger" href="manage_pet.php">Quản lý thú cưng</a></li>
@@ -30,8 +27,9 @@ include("../connect.php");
                     <li><a class="text-danger" href="logout.php">Đăng xuất</a></li>
                 </ul>
             </div>
-        </nav>
+        </nav> -->
     </section>
+
     <div class="container">
         <div class="row">
             <h1 class="text-center">QUẢN LÝ NGƯỜI DÙNG</h1>
@@ -86,6 +84,19 @@ include("../connect.php");
             </div>
         </div>
     </div>
+    <script>
+    window.onscroll = function() {myFunction()};
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+}
+    </script>  
 </body>
 
 </html>

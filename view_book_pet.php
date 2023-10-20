@@ -2,7 +2,7 @@
     include './connect.php';
     
     $userId = $_COOKIE['userId'];
-    $sql_show_prd = "SELECT * FROM pet as p, pet_category as c WHERE p.pet_category_id = c.pet_category_id AND p.user_id = '$userId'";
+    $sql_show_prd = "SELECT * FROM pet AS p, pet_category AS c, service AS s WHERE p.pet_category_id = c.pet_category_id AND p.user_id = '$userId' AND p.pet_id = s.pet_id";
     // echo $sql_show_prd; exit;
     $query_show_prd = mysqli_query($con,$sql_show_prd);
     if($userId != ''){
@@ -56,14 +56,14 @@
                                         <td><?php echo $row['pet_description'] ?></td>
                                         <td><?php echo $row['pet_category_name']?></td>
                                         <td><img src="./asset/img/<?php echo $row['pet_img']?>"> </td>
-                                        <td><?php echo $row['pet_date']?></td>
+                                        <td><?php echo $row['pet_date_add']?></td>
                                         <td>
                                             <?php 
-                                                if($row['pet_service_date'] == NULL){
+                                                if($row['service_date'] == NULL){
                                                     echo "Đang xử lý";
                                                 }
                                                 else{
-                                                    echo $row['pet_service_date'];
+                                                    echo $row['service_date'];
                                                 }
                                             ?>
                                         </td>
@@ -79,21 +79,21 @@
                                         </td>
                                         <td>
                                             <?php 
-                                                if($row['pet_service_detail'] == NULL){
+                                                if($row['service_detail'] == NULL){
                                                     echo "Đang xử lý";
                                                 }
                                                 else{
-                                                    echo $row['pet_service_detail'];
+                                                    echo $row['service_detail'];
                                                 }
                                             ?>
                                         </td>
                                         <td>
                                             <?php 
-                                                if($row['pet_service_fee'] == NULL){
+                                                if($row['service_fee'] == NULL){
                                                     echo 0;
                                                 }
                                                 else{
-                                                    echo $row['pet_service_fee'];
+                                                    echo $row['service_fee'];
                                                 }
                                             ?>
                                         </td>

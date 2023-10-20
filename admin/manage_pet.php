@@ -1,8 +1,8 @@
 <?php
     include '../connect.php';
 
-    $sql_show_prd = "SELECT * FROM pet AS p, users AS u, pet_category AS c 
-    WHERE p.user_id = u.user_id AND c.pet_category_id = p.pet_category_id";
+    $sql_show_prd = "SELECT * FROM pet AS p, users AS u, pet_category AS c, service AS s
+    WHERE p.user_id = u.user_id AND c.pet_category_id = p.pet_category_id AND p.pet_id = s.pet_id";
     // echo $sql_show_prd; exit;
     $query_show_prd = mysqli_query($con,$sql_show_prd);
 ?>
@@ -18,8 +18,11 @@
     <title>Petshop | ADMIN</title>
 </head>
 <body>
-<section class="header">
-        <nav>
+<section class="header" id="myHeader">
+    <?php 
+        include './header.php';
+    ?>
+        <!-- <nav>
             <div class="nav-links">
                 <ul>
                     <li><a class="text-danger" href="manage_pet.php">Quản lý thú cưng</a></li>
@@ -28,7 +31,7 @@
                     <li><a class="text-danger" href="logout.php">Đăng xuất</a></li>
                 </ul>
             </div>
-        </nav>
+        </nav> -->
     </section>
         <h1 class="h1">QUẢN LÝ THÚ CƯNG</h1>
             <div class="">
@@ -60,15 +63,15 @@
                                         <td><?php echo $row['user_name'] ?></td>
                                         <td><?php echo $row['pet_name'] ?></td>
                                         <td><?php echo $row['pet_category_name']?></td>
-                                        <td><?php echo $row['pet_date']?></td>
+                                        <td><?php echo $row['pet_date_add']?></td>
                                         <td><img src="../asset/img/<?php echo $row['pet_img']?>"> </td>
                                         <td>
                                             <?php 
-                                                if ($row['pet_service_date'] == NULL){
+                                                if ($row['service_date'] == NULL){
                                                     echo "Đang cập nhật";
                                                 }
                                                 else{
-                                                    echo $row['pet_service_date'];
+                                                    echo $row['service_date'];
                                                 }
                                             ?>
                                         </td>
@@ -84,21 +87,21 @@
                                         </td>
                                         <td>
                                             <?php 
-                                                if($row['pet_service_detail'] == NULL){
+                                                if($row['service_detail'] == NULL){
                                                     echo "Đang chờ xử lý";
                                                 }
                                                 else{
-                                                    echo $row['pet_service_detail'];
+                                                    echo $row['service_detail'];
                                                 }
                                             ?>
                                         </td>
                                         <td>
                                             <?php 
-                                                if($row['pet_service_fee'] == NULL){
+                                                if($row['service_fee'] == NULL){
                                                     echo "0";
                                                 }
                                                 else{
-                                                    echo  number_format($row['pet_service_fee'], 0, ',', '.');
+                                                    echo  number_format($row['service_fee'], 0, ',', '.');
                                                 }
                                             ?>
                                         </td>
@@ -113,6 +116,19 @@
                     </thead>
                 </table>
         </div>   
-        </fieldset>     
+        </fieldset> 
+        <script>
+    window.onscroll = function() {myFunction()};
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+}
+    </script>      
 </body> 
 </html>

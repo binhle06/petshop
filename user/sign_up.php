@@ -45,7 +45,7 @@
 
             <div class="form-group">
                 <label for="fullname" class="form-label">User Name</label>
-                <input id="fullname" type="text" name="name" placeholder="VD: KimLong" class="form-control">
+                <input id="fullname" type="text" name="name" placeholder="VD: Thanh Binh" class="form-control">
                 <span class="form-message"></span>
             </div>
             <div class="form-group">

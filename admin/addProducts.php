@@ -29,11 +29,17 @@ if (isset($_POST["submit"])) {
             $message = "This product already exist, Please check it again!";
             echo "<script type='text/javascript'>alert('$message');</script>";
         } else {
-            $sql = "INSERT INTO pet_product (pet_prod_id, pet_prod_name, pet_prod_detail, pet_prod_price, pet_prod_origin, pet_prod_image, pet_prod_quantity, pet_category_id, ngay_sua_doi)  
-            VALUES ('$pet_prod_id', '$pet_prod_name', '$pet_prod_detail', '$pet_prod_price', '$pet_prod_origin', '$pet_prod_img', '$pet_prod_quatity','$pet_category_id',CURRENT_TIMESTAMP())";
-            mysqli_query($con, $sql);
-            move_uploaded_file($pet_prod_img_tmp, '../asset/img/' . $path_image);
-            header('location:adminProductMange.php');
+            if($pet_prod_price > 0 && $pet_prod_quatity > 0){
+                $sql = "INSERT INTO pet_product (pet_prod_id, pet_prod_name, pet_prod_detail, pet_prod_price, pet_prod_origin, pet_prod_image, pet_prod_quantity, pet_category_id, pet_prod_date_add)  
+                VALUES ('$pet_prod_id', '$pet_prod_name', '$pet_prod_detail', '$pet_prod_price', '$pet_prod_origin', '$pet_prod_img', '$pet_prod_quatity','$pet_category_id',CURRENT_TIMESTAMP())";
+                // echo $sql; exit;
+                mysqli_query($con, $sql);
+                move_uploaded_file($pet_prod_img_tmp, '../asset/img/' . $path_image);
+                header('location:adminProductMange.php');
+            } else{
+                $mq = "Vui lòng nhập số dương";
+                echo "<script type='text/javascript'>alert('$mq');</script>";
+            }
         }
     } else {
         $mq = "Vui lòng nhập đầy đủ thông tin";

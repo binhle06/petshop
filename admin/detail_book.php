@@ -27,8 +27,8 @@
                             <center><?php 
                                 require "../connect.php";
                                 $id=$_GET['id'];
-                                $sql= "SELECT * FROM pet AS p, users AS u, pet_category AS c 
-                                WHERE u.user_id = '$id' AND p.user_id = '$id' AND c.pet_category_id = p.pet_category_id";
+                                $sql= "SELECT * FROM pet AS p, users AS u, pet_category AS c, service AS s 
+                                WHERE u.user_id = '$id' AND p.user_id = '$id' AND c.pet_category_id = p.pet_category_id AND p.pet_id = s.pet_id";
                                 // echo $sql; exit;
                                 $rs = $con->query($sql);
                                 $row = $rs->fetch_assoc();
@@ -59,7 +59,7 @@
                                         <img src="../asset/img/<?php echo $value['pet_img'];?>"/>
                                     </td>
                                     <td>
-                                        <p><?php echo $value['pet_date'];?></p>
+                                        <p><?php echo $value['pet_date_add'];?></p>
                                     </td>
                                     <td>
                                         <?php 
@@ -73,11 +73,11 @@
                                     </td>
                                     <td>
                                             <?php 
-                                                if($value['pet_service_fee'] == NULL){
+                                                if($value['service_fee'] == NULL){
                                                     echo "Đang chờ xử lý";
                                                 }
                                                 else{
-                                                    echo  number_format($value['pet_service_fee'], 0, ',', '.');
+                                                    echo  number_format($value['service_fee'], 0, ',', '.');
                                                 }
                                             ?>
                                         </td>
@@ -91,7 +91,7 @@
                             function total_price($que){
                                 $total = 0;
                                 foreach($que as $key => $value){
-                                    $total += $value['pet_service_fee'];
+                                    $total += $value['service_fee'];
                                 }
                                 $format =  number_format($total, 0, ',', '.');
                                 return $format;

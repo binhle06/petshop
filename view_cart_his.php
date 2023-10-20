@@ -19,8 +19,8 @@
         $userId = $_COOKIE['userId'];
         if($userId != ""){
             $sql =  "SELECT o.order_total, o.order_numberOfItem, p.pet_prod_name, p.pet_prod_origin, p.pet_prod_image, 
-            p.pet_prod_price, p.pet_prod_quantity, p.pet_prod_id, o.Status
-            FROM orders AS o, pet_product AS p WHERE o.Status = 1 and o.pet_prod_id = p.pet_prod_id AND o.user_id = '$userId'";
+            p.pet_prod_price, p.pet_prod_quantity, p.pet_prod_id, o.order_status
+            FROM orders AS o, pet_product AS p WHERE o.order_status = 1 and o.pet_prod_id = p.pet_prod_id AND o.user_id = '$userId'";
             $que = $con->query($sql);
             $i=1;
             $r = mysqli_fetch_assoc($que);
@@ -74,7 +74,7 @@
                     <td><?php  echo $for = number_format($value['order_total'], 0, ',','.')  ?></td>
                     <td>
                         <?php 
-                            if($value['Status'] == 1){
+                            if($value['order_status'] == 1){
                                 echo "Đã thanh toán";
                                 }
                             else{

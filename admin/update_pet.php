@@ -5,7 +5,7 @@
     //lay ma pet 
     $code = $_GET['id'];
     //lay thong tin lien quan den pet
-    $sql_show_prd = "SELECT * FROM pet WHERE pet_id = '$code' ";
+    $sql_show_prd = "SELECT * FROM pet AS p, service AS s WHERE p.pet_id = '$code' AND s.pet_id = '$code'";
     
     // echo $sql_show_prd; exit;
     // thuc thi cau lenh sql
@@ -15,20 +15,26 @@
 
     if (isset($_POST["submit"])){
         $pet_id = $_POST["pet_id"];
-        $pet_service_detail = $_POST["pet_service_detail"];
-        $pet_service_fee = $_POST["pet_service_fee"];
+        $pet_service_detail = $_POST["service_detail"];
+        // echo $pet_service_detail; exit;
+        $pet_service_fee = $_POST["service_fee"];
     
         //viet cau lenh edit
-        $sql_edit = "UPDATE pet SET 
-        pet_service_date = CURRENT_TIMESTAMP(), 
-        pet_service_detail = '$pet_service_detail', 
-        pet_service_fee = '$pet_service_fee',
-        pet_status = '1'
+        $sql_edit = "UPDATE service SET 
+        service_date = CURRENT_TIMESTAMP(), 
+        service_detail = '$pet_service_detail', 
+        service_fee = '$pet_service_fee'
         WHERE pet_id = '$pet_id'";
         // echo $sql_edit;exit;
 
+        $sql_e = "UPDATE pet SET 
+        pet_status = '1'
+        WHERE pet_id = '$pet_id'";
+
+        // echo $sql_e;exit;
 
         //thuc thi cau lenh
+        mysqli_query($con, $sql_e);
         mysqli_query($con, $sql_edit);
         header('location:manage_pet.php');
     }
@@ -53,13 +59,13 @@
 
         <div class="form-group">
             <label for="pet_name" class="form-label">Chi tiết chăm sóc</label>
-            <textarea id="pet_name" type="text" placeholder="Nhập chi tiết" name="pet_service_detail" class="form-control"><?php echo $r['pet_service_detail']; ?></textarea>
+            <textarea id="pet_name" type="text" placeholder="Nhập chi tiết" name="service_detail" class="form-control"><?php echo $r['service_detail']; ?></textarea>
             <span class="form-message"></span>
         </div>
         
         <div class="form-group">
             <label for="pet_fee" class="form-label">Thành tiền</label>
-            <input id="pet fee" type="number" placeholder="Nhập giá tiền" name="pet_service_fee" class="form-control" value="<?php echo $r['pet_service_fee']; ?>">
+            <input id="pet fee" type="number" placeholder="Nhập giá tiền" name="service_fee" class="form-control" value="<?php echo $r['service_fee']; ?>">
             <span class="form-message"></span>
         </div>
         <button class="form-submit" name="submit">Hoàn thành chăm sóc</button>

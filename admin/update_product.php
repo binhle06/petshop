@@ -39,7 +39,7 @@
             pet_prod_image = '$pet_prod_img', 
             pet_prod_price = '$pet_prod_price',
             pet_category_id = '$pet_category_id',
-            ngay_sua_doi = CURRENT_TIMESTAMP()
+            pet_prod_date_change = CURRENT_TIMESTAMP()
             WHERE pet_prod_id = '$pet_prod_id' ";
             // echo $sql_edit; exit;
         }
@@ -52,7 +52,7 @@
             pet_prod_origin = '$pet_prod_origin',  
             pet_prod_price = '$pet_prod_price',
             pet_category_id = '$pet_category_id',
-            ngay_sua_doi = CURRENT_TIMESTAMP()
+            pet_prod_date_change = CURRENT_TIMESTAMP()
             WHERE pet_prod_id = '$pet_prod_id' ";
             // echo $sql_edit; exit;
         }

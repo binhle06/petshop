@@ -55,7 +55,7 @@
             <div class="spacer"></div>
             <div class="form-group">
                 <label for="fullname" class="form-label">ADMIN Name</label>
-                <input id="fullname" type="text" name="admin_name" placeholder="VD: KimLong" class="form-control">
+                <input id="fullname" type="text" name="admin_name" placeholder="VD: ADMIN" class="form-control">
                 <span class="form-message"></span>
             </div>
             <div class="form-group">

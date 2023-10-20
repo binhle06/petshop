@@ -81,7 +81,7 @@
 <?php
         }
 ?>
-<script>
+<!-- <script>
     document.getElementById("cartForm-<?php echo $r; ?>").addEventListener("submit", function(event) {
         event.preventDefault(); // Ngăn chặn gửi form tự động
         // Xử lý gửi dữ liệu form tại đây
@@ -95,4 +95,4 @@
             };
             xhr.send(formData);
     });
-</script>
+</script> -->

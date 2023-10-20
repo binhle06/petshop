@@ -19,13 +19,13 @@
         $userId = $_COOKIE['userId'];
         if($userId != ""){
             $sql =  "SELECT o.order_total, o.order_numberOfItem, p.pet_prod_name, p.pet_prod_origin, p.pet_prod_image, 
-            p.pet_prod_price, p.pet_prod_quantity, p.pet_prod_id, o.Status
-            FROM orders AS o, pet_product AS p WHERE o.Status = 0 and o.pet_prod_id = p.pet_prod_id AND o.user_id = '$userId'";
+            p.pet_prod_price, p.pet_prod_quantity, p.pet_prod_id, o.order_status
+            FROM orders AS o, pet_product AS p WHERE o.order_status = 0 and o.pet_prod_id = p.pet_prod_id AND o.user_id = '$userId'";
             // echo $sql;exit;
             $que = $con->query($sql);
             $i=1;
             $r = mysqli_fetch_assoc($que);
-            if($r['Status'] !== '0'){
+            if($r['order_status'] !== '0'){
                 echo "<script>alert('Your cart is empty');location.href='./index.php'</script>";
                 
             }

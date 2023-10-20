@@ -1,7 +1,7 @@
 <?php
     include '../connect.php';
     session_start();
-    $sql_show_prd = "SELECT * FROM pet_product ORDER BY stt DESC";
+    $sql_show_prd = "SELECT * FROM pet_product ORDER BY pet_prod_stt DESC";
     $query_show_prd = mysqli_query($con,$sql_show_prd);
     // Kiểm tra trạng thái đăng nhập của người dùng
     // if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
@@ -22,16 +22,20 @@
 </head>
 <body>
 <section class="header">
-        <nav>
+    <?php 
+        include './header.php';
+    ?>
+        <!-- <nav>
             <div class="nav-links">
                 <ul>
+                    <li><a class="text-danger" href="don_hang.php">Quản lý đơn hàng</a></li>
                     <li><a class="text-danger" href="manage_pet.php">Quản lý thú cưng</a></li>
                     <li><a class="text-danger" href="adminProductMange.php">Quản lý sản phẩm</a></li>
                     <li><a class="text-danger" href="manage_customer.php">Quản lý người dùng</a></li>
                     <li><a class="text-danger" href="logout.php">Đăng xuất</a></li>
                 </ul>
             </div>
-        </nav>
+        </nav> -->
     </section>
         <h1 class="h1">QUẢN LÝ SẢN PHẨM</h1>
             <div style="padding-left: 20px;">
